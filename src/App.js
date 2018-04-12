@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "./logo.svg";
+import Map from "./map";
+import Sidebar from "./sidebar";
 
 const Main = styled.div`
   background: grey;
@@ -8,12 +9,7 @@ const Main = styled.div`
 
 export default () => (
   <Main className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">Welcome to React</h1>
-    </header>
-    <p className="App-intro">
-      To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
+    <Map />
+    <Sidebar />
   </Main>
 );
