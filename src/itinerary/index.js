@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import styled from "styled-components";
+import moment from "moment";
 
 import Item from "./item";
 import Header from "./header";
@@ -19,15 +20,14 @@ const reorder = (
   endDroppableId,
 ) => {
   const result = Array.from(list);
-  const [removed] = result[startDroppableId].splice(startIndex, 1);
-  result[endDroppableId].splice(endIndex, 0, removed);
+  const [removed] = result[startDroppableId].items.splice(startIndex, 1);
+  result[endDroppableId].items.splice(endIndex, 0, removed);
 
   return result;
 };
 
 const Day = styled.div`
     background: ${props => (props.isDraggingOver ? "lightblue" : "lightgrey")},
-    padding: grid,
     width: 250,
 `;
 
@@ -35,7 +35,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      days: [getItems(5, "list 1"), getItems(5, "list 2")],
+      days: [
+        {
+          date: moment(),
+          items: getItems(5, "list 1"),
+        },
+        {
+          date: moment().add(1, "day"),
+          items: getItems(5, "list 2"),
+        },
+      ],
     };
     this.onDragEnd = this.onDragEnd.bind(this);
   }
@@ -61,14 +70,14 @@ class App extends Component {
   render() {
     const Droppables = this.state.days.map((day, i) => (
       <div>
-        <Header>Monday 12th April</Header>
+        <Header>{day.date.format("dddd Do MMMM")}</Header>
         <Droppable droppableId={`${i}-day`} key={`${day}-day`}>
           {(provided, snapshot) => (
             <Day
               innerRef={provided.innerRef}
               isDraggingOver={snapshot.isDraggingOver}
             >
-              {day.map((item, index) => <Item index={index} {...item} />)}
+              {day.items.map((item, index) => <Item index={index} {...item} />)}
               {provided.placeholder}
             </Day>
           )}

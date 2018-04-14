@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "mapbox-gl": "^0.44.2",
+    "moment": "^2.22.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-beautiful-dnd": "^7.0.0",
