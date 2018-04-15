@@ -1,6 +1,8 @@
 import React from "react";
-import ReactMapboxGl, {Marker} from "react-mapbox-gl";
+import ReactMapboxGl from "react-mapbox-gl";
 import {array} from "prop-types";
+
+import Marker from "./Marker";
 
 const london = [-0.127758, 51.507351];
 
@@ -9,14 +11,11 @@ const Map = ReactMapboxGl({
     "pk.eyJ1IjoiZmlkZ2V0eSIsImEiOiJjamZ2bHFqaTMwMWxhMzNxYWRwazRsZnI1In0.9cE8KDydvJF8MatzYAwVQQ",
 });
 
-const Item = (coords, name) => (
-  <Marker coordinates={coords}>
-    <div>{name}</div>
-  </Marker>
-);
-
 const MapAndMarkers = props => {
-  const Items = props.items.map(item => <Item {...item} />);
+  // const Items = props.items.map(item => <Item {...item} />);
+  const Items = props.items.map(item => (
+    <Marker coords={item.coords} name={item.name} key={item.name} />
+  ));
 
   return (
     <Map
