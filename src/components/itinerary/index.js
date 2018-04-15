@@ -1,18 +1,11 @@
-/* eslint-disable */
-
 import React, {Component} from "react";
 import {observer} from "mobx-react";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
-import styled from "styled-components";
 import {object} from "prop-types";
 
-import Item from "./item";
-import Header from "./header";
+import Header from "./Header";
 
-const Day = styled.div`
-    background: ${props => (props.isDraggingOver ? "lightblue" : "white")};
-    min-height: 30px;
-`;
+import Day from "./Day";
 
 class _App extends Component {
   constructor(props) {
@@ -26,16 +19,12 @@ class _App extends Component {
       return;
     }
 
-    const days = this.props.itinerary.moveItem(
+    this.props.itinerary.moveItem(
       result.source.index,
       parseInt(result.source.droppableId, 10),
       result.destination.index,
       parseInt(result.destination.droppableId, 10),
     );
-
-    this.setState({
-      days,
-    });
   }
 
   render() {
@@ -44,15 +33,7 @@ class _App extends Component {
         <Header>{day.date.format("dddd Do MMMM")}</Header>
         <Droppable droppableId={`${i}-day`}>
           {(provided, snapshot) => (
-            <Day
-              innerRef={provided.innerRef}
-              isDraggingOver={snapshot.isDraggingOver}
-            >
-              {day.items.map((item, index) => (
-                <Item index={index} {...item} key={item.name} />
-              ))}
-              {provided.placeholder}
-            </Day>
+            <Day provided={provided} snapshot={snapshot} items={day.items} />
           )}
         </Droppable>
       </div>
@@ -65,7 +46,7 @@ class _App extends Component {
 }
 
 _App.propTypes = {
-  itinerary: object,
+  itinerary: object, // eslint-disable-line
 };
 
 export default observer(_App);

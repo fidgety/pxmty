@@ -1,35 +1,11 @@
-import {extendObservable} from "mobx";
-import moment from "moment";
+import {extendObservable, computed} from "mobx";
+import testData from "./testData";
 
 const itinerary = extendObservable(this, {
-  days: [
-    {
-      date: moment(),
-      items: [
-        {
-          name: "item 1",
-          id: `id-${Math.random()}`,
-        },
-        {
-          name: "item 2",
-          id: `id-${Math.random()}`,
-        },
-      ],
-    },
-    {
-      date: moment().add(1, "day"),
-      items: [
-        {
-          name: "item 3",
-          id: `id-${Math.random()}`,
-        },
-        {
-          name: "item 4",
-          id: `id-${Math.random()}`,
-        },
-      ],
-    },
-  ],
+  days: testData,
+  get items() {
+    return this.days.flatten();
+  },
   moveItem(startIndex, movedFromDay, endIndex, movedToDay) { //eslint-disable-line
     const [removed] = this.days[movedFromDay].items.splice(startIndex, 1);
     this.days[movedToDay].items.splice(endIndex, 0, removed);
