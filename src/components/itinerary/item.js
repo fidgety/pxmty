@@ -1,14 +1,14 @@
 import React from "react";
 import {Draggable} from "react-beautiful-dnd";
-import {integer, string} from "prop-types";
+import {number, string} from "prop-types";
 
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   padding: "16px",
-  "margin-bottom": "8px",
+  marginBottom: "8px",
   background: isDragging ? "#bbb" : "#eee",
-  "font-family": "sans-serif",
+  fontFamily: "sans-serif",
 
   // styles we need to apply on draggables
   ...draggableStyle,
@@ -26,16 +26,16 @@ const Item = props => (
           providedItem.draggableProps.style,
         )}
       >
-        {props.content}
+        {props.name}
       </div>
     )}
   </Draggable>
 );
 
 Item.propTypes = {
-  id: integer,
-  index: integer,
-  content: string,
+  id: string,
+  index: number,
+  name: string,
 };
 
 export default Item;
