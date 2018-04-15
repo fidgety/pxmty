@@ -10,8 +10,8 @@ import Item from "./item";
 import Header from "./header";
 
 const Day = styled.div`
-    background: ${props => (props.isDraggingOver ? "lightblue" : "lightgrey")},
-    width: 250,
+    background: ${props => (props.isDraggingOver ? "lightblue" : "white")};
+    min-height: 30px;
 `;
 
 class _App extends Component {
