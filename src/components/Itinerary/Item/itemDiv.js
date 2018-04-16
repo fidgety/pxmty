@@ -2,18 +2,37 @@ import React from "react";
 import {object, string} from "prop-types";
 import {observer} from "mobx-react";
 
-const getItemStyle = (isDragging, draggableStyle) => ({
-  userSelect: "none",
-  padding: "16px",
-  marginBottom: "8px",
-  background: isDragging ? "#bbb" : "#eee",
-  fontFamily: "sans-serif",
+const getItemStyle = (isDragging, draggableStyle, hovered) => {
+  let background = "#eee";
 
-  // styles we need to apply on draggables
-  ...draggableStyle,
-});
+  if (isDragging) {
+    background = "#bbb";
+  }
 
-const ItemDiv = ({providedItem, snapshotItem, name}) => (
+  if (hovered) {
+    background = "pink";
+  }
+
+  return {
+    userSelect: "none",
+    padding: "16px",
+    marginBottom: "8px",
+    background,
+    fontFamily: "sans-serif",
+
+    // styles we need to apply on draggables
+    ...draggableStyle,
+  };
+};
+
+const ItemDiv = ({
+  providedItem,
+  snapshotItem,
+  name,
+  onMouseOver,
+  hovered,
+  id,
+}) => (
   <div
     ref={providedItem.innerRef}
     {...providedItem.draggableProps}
@@ -21,7 +40,9 @@ const ItemDiv = ({providedItem, snapshotItem, name}) => (
     style={getItemStyle(
       snapshotItem.isDragging,
       providedItem.draggableProps.style,
+      hovered,
     )}
+    onMouseOver={() => onMouseOver(id)}
   >
     {name}
   </div>

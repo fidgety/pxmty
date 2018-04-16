@@ -11,6 +11,9 @@ const Item = props => (
         providedItem={providedItem}
         snapshotItem={snapshotItem}
         name={props.name}
+        hovered={props.hovered}
+        id={props.id}
+        onMouseOver={props.hoverItem}
       />
     )}
   </Draggable>

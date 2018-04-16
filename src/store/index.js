@@ -1,5 +1,14 @@
-import {extendObservable, computed} from "mobx";
+import {extendObservable} from "mobx";
 import testData from "./testData";
+
+const findItemById = (days, id) => {
+  for (let i = 0; i < days.length; i++) {
+    const foundItem = days[i].items.find(item => item.id === id);
+    if (foundItem) {
+        return foundItem;
+    }
+  }
+};
 
 const itinerary = extendObservable(this, {
   days: testData,
@@ -8,12 +17,13 @@ const itinerary = extendObservable(this, {
       (prev, next) => prev.concat(next.items.slice()),
       [],
     );
-
-    // return this.days.reduce((prev, day) => prev.concat(day.items), []);
   },
-  moveItem(startIndex, movedFromDay, endIndex, movedToDay) { //eslint-disable-line
+  moveItem(startIndex, movedFromDay, endIndex, movedToDay) {
     const [removed] = this.days[movedFromDay].items.splice(startIndex, 1);
     this.days[movedToDay].items.splice(endIndex, 0, removed);
+  },
+  hoverItem: id => {
+    findItemById(this.days, id).hovered = true;
   },
 });
 

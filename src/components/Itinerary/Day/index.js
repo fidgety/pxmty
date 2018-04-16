@@ -10,13 +10,13 @@ const DayStyles = styled.div`
   min-height: 30px;
 `;
 
-const DayDropZone = ({provided, snapshot, items}) => (
+const DayDropZone = ({provided, snapshot, items, hoverItem}) => (
   <DayStyles
     innerRef={provided.innerRef}
     isDraggingOver={snapshot.isDraggingOver}
   >
     {items.map((item, index) => (
-      <Item index={index} {...item} key={item.name} />
+      <Item index={index} {...item} key={item.name} hoverItem={hoverItem} />
     ))}
     {provided.placeholder}
   </DayStyles>

@@ -33,7 +33,12 @@ class _App extends Component {
         <Header>{day.date.format("dddd Do MMMM")}</Header>
         <Droppable droppableId={`${i}-day`}>
           {(provided, snapshot) => (
-            <Day provided={provided} snapshot={snapshot} items={day.items} />
+            <Day
+              provided={provided}
+              snapshot={snapshot}
+              items={day.items}
+              hoverItem={this.props.itinerary.hoverItem}
+            />
           )}
         </Droppable>
       </div>
