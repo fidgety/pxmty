@@ -2,7 +2,7 @@ import {extendObservable} from "mobx";
 import testData from "./testData";
 
 const findItemById = (days, id) => {
-  for (let i = 0; i < days.length; i++) {
+  for (let i = 0; i < days.length; i += 1) {
     const foundItem = days[i].items.find(item => item.id === id);
     if (foundItem) {
         return foundItem;
@@ -24,6 +24,9 @@ const itinerary = extendObservable(this, {
   },
   hoverItem: id => {
     findItemById(this.days, id).hovered = true;
+  },
+  leaveItem: id => {
+    findItemById(this.days, id).hovered = false;
   },
 });
 

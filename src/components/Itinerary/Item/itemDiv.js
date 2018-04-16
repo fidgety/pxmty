@@ -30,6 +30,7 @@ const ItemDiv = ({
   snapshotItem,
   name,
   onMouseOver,
+  onMouseOut,
   hovered,
   id,
 }) => (
@@ -43,6 +44,7 @@ const ItemDiv = ({
       hovered,
     )}
     onMouseOver={() => onMouseOver(id)}
+    onMouseOut={() => onMouseOut(id)}
   >
     {name}
   </div>

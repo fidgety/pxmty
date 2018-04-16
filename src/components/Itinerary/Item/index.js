@@ -14,6 +14,7 @@ const Item = props => (
         hovered={props.hovered}
         id={props.id}
         onMouseOver={props.hoverItem}
+        onMouseOut={props.leaveItem}
       />
     )}
   </Draggable>

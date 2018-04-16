@@ -1,6 +1,9 @@
 import React from "react";
 import ReactMapboxGl from "react-mapbox-gl";
 import {array} from "prop-types";
+import {observer} from "mobx-react";
+
+import store from "../../store";
 
 import Marker from "./Marker";
 
@@ -11,10 +14,9 @@ const Map = ReactMapboxGl({
     "pk.eyJ1IjoiZmlkZ2V0eSIsImEiOiJjamZ2bHFqaTMwMWxhMzNxYWRwazRsZnI1In0.9cE8KDydvJF8MatzYAwVQQ",
 });
 
-const MapAndMarkers = props => {
-  // const Items = props.items.map(item => <Item {...item} />);
-  const Items = props.items.map(item => (
-    <Marker coords={item.coords} name={item.name} key={item.name} />
+const MapAndMarkers = () => {
+  const Items = store.items.map(item => (
+    <Marker {...item} {...store} key={item.name} />
   ));
 
   return (
@@ -42,4 +44,4 @@ MapAndMarkers.defaultProps = {
   items: [],
 };
 
-export default MapAndMarkers;
+export default observer(MapAndMarkers);

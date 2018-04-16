@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import Itinerary from "./Itinerary";
-import store from "../store";
 
 import DevTools from "mobx-react-devtools";
 
@@ -22,6 +21,6 @@ const Sidebar = styled.div`
 export default () => (
   <Sidebar>
     <DevTools />
-    <Itinerary itinerary={store} />
+    <Itinerary />
   </Sidebar>
 );
