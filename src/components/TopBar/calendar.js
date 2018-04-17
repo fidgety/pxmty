@@ -1,5 +1,24 @@
 import React from "react";
 import DayPicker, {DateUtils} from "react-day-picker";
+import moment from "moment";
+import styled from "styled-components";
+
+const Dates = styled.div`
+  font-family: sans-serif;
+  padding: 16px;
+`;
+
+const DayPickerWrapper = styled.div`
+  background: white;
+  display: inline-block;
+`;
+
+const isSelectingFirstDay = (from, to, day) => {
+  const isBeforeFirstDay = from && DateUtils.isDayBefore(day, from);
+  const isRangeSelected = from && to;
+
+  return !from || isBeforeFirstDay || isRangeSelected;
+};
 
 export default class Example extends React.Component {
   static defaultProps = {
@@ -8,49 +27,61 @@ export default class Example extends React.Component {
   constructor(props) {
     super(props);
     this.handleDayClick = this.handleDayClick.bind(this);
-    this.handleResetClick = this.handleResetClick.bind(this);
     this.state = this.getInitialState();
   }
   getInitialState() {
     return {
-      from: undefined,
-      to: undefined,
+      from: moment().toDate(),
+      to: moment()
+        .add(1, "day")
+        .toDate(),
+      show: false,
     };
   }
+
   handleDayClick(day) {
-    const range = DateUtils.addDayToRange(day, this.state);
-    this.setState(range);
-  }
-  handleResetClick() {
-    this.setState(this.getInitialState());
-  }
-  render() {
     const {from, to} = this.state;
+    // if (from && to && day >= from && day <= to) {
+    //   this.handleResetClick();
+    //
+    //   return;
+    // }
+    if (isSelectingFirstDay(from, to, day)) {
+      this.setState({
+        from: day,
+        to: null,
+      });
+    } else {
+      this.setState({
+        to: day,
+        show: false,
+      });
+    }
+  }
+
+  render() {
+    const {from, to, show} = this.state;
     const modifiers = {start: from, end: to};
 
     return (
       <div className="RangeExample">
-        <p>
-          {!from && !to && "Please select the first day."}
-          {from && !to && "Please select the last day."}
+        <Dates onClick={() => this.setState({show: !show})}>
           {from &&
             to &&
-            `Selected from ${from.toLocaleDateString()} to
-                ${to.toLocaleDateString()}`}{" "}
-          {from &&
-            to && (
-              <button className="link" onClick={this.handleResetClick}>
-                Reset
-              </button>
-            )}
-        </p>
-        <DayPicker
-          className="Selectable"
-          numberOfMonths={2}
-          selectedDays={[from, {from, to}]}
-          modifiers={modifiers}
-          onDayClick={this.handleDayClick}
-        />
+            `${moment(from).format("ddd Do MMMM")} -
+                ${moment(to).format("ddd Do MMMM")}`}{" "}
+        </Dates>
+        {show && (
+          <DayPickerWrapper>
+            <DayPicker
+              className="Selectable"
+              numberOfMonths={2}
+              selectedDays={[from, {from, to}]}
+              modifiers={modifiers}
+              onDayClick={this.handleDayClick}
+            />
+          </DayPickerWrapper>
+        )}
       </div>
     );
   }

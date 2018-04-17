@@ -5,10 +5,10 @@ import Itinerary from "./Itinerary";
 
 const Sidebar = styled.div`
   width: 300px;
-  height: calc(100% - 138px);
+  height: calc(100% - 122px);
   position: absolute;
   background: rgba(255, 255, 255, 0.8);
-  top: 104px;
+  top: 86px;
   left: 16px;
   overflow: scroll;
   padding: 0 16px 16px 16px;
