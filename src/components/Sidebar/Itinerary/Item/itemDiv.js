@@ -1,5 +1,5 @@
 import React from "react";
-import {object, string} from "prop-types";
+import {object, string, func, bool} from "prop-types";
 import {observer} from "mobx-react";
 
 const getItemStyle = (isDragging, draggableStyle, hovered) => {
@@ -29,8 +29,8 @@ const ItemDiv = ({
   providedItem,
   snapshotItem,
   name,
-  onMouseOver,
-  onMouseOut,
+  hoverItem,
+  leaveItem,
   hovered,
   id,
 }) => (
@@ -43,8 +43,10 @@ const ItemDiv = ({
       providedItem.draggableProps.style,
       hovered,
     )}
-    onMouseOver={() => onMouseOver(id)}
-    onMouseOut={() => onMouseOut(id)}
+    onMouseOver={() => hoverItem(id)}
+    onMouseOut={() => leaveItem(id)}
+    onFocus={() => hoverItem(id)}
+    onBlur={() => leaveItem(id)}
   >
     {name}
   </div>
@@ -54,6 +56,10 @@ ItemDiv.propTypes = {
   providedItem: object, //eslint-disable-line
   snapshotItem: object, //eslint-disable-line
   name: string,
+  hoverItem: func,
+  leaveItem: func,
+  hovered: bool,
+  id: string,
 };
 
 export default observer(ItemDiv);

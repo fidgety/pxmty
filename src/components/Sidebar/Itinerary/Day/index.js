@@ -1,7 +1,7 @@
 import React from "react";
 import {observer} from "mobx-react";
 import styled from "styled-components";
-import {object} from "prop-types";
+import {object, func} from "prop-types";
 
 import Item from "../Item";
 
@@ -31,7 +31,9 @@ const DayDropZone = ({provided, snapshot, items, hoverItem, leaveItem}) => (
 DayDropZone.propTypes = {
   provided: object, //eslint-disable-line
   snapshot: object, //eslint-disable-line
-  items: object,//eslint-disable-line
+  items: object, // eslint-disable-line
+  hoverItem: func,
+  leaveItem: func,
 };
 
 export default observer(DayDropZone);

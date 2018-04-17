@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Map from "./components/Map";
-import Sidebar from "./components/sidebar";
+import Sidebar from "./components/Sidebar";
 
 const Main = styled.div`
   background: grey;

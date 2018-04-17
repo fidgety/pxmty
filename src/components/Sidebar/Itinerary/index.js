@@ -6,7 +6,7 @@ import {object} from "prop-types";
 import Header from "./Header";
 import Day from "./Day";
 
-import store from "../../store";
+import store from "../../../store";
 
 const onDragEnd = result => {
   if (!result.destination) {

@@ -1,6 +1,6 @@
 import React from "react";
 import {Draggable} from "react-beautiful-dnd";
-import {number, string} from "prop-types";
+import {number, string, bool, func} from "prop-types";
 
 import ItemDiv from "./itemDiv";
 
@@ -13,8 +13,8 @@ const Item = props => (
         name={props.name}
         hovered={props.hovered}
         id={props.id}
-        onMouseOver={props.hoverItem}
-        onMouseOut={props.leaveItem}
+        hoverItem={props.hoverItem}
+        leaveItem={props.leaveItem}
       />
     )}
   </Draggable>
@@ -24,6 +24,9 @@ Item.propTypes = {
   id: string,
   index: number,
   name: string,
+  hovered: bool,
+  hoverItem: func,
+  leaveItem: func,
 };
 
 export default Item;
