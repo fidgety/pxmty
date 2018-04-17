@@ -3,14 +3,12 @@ import styled from "styled-components";
 
 import Itinerary from "./Itinerary";
 
-import DevTools from "mobx-react-devtools";
-
 const Sidebar = styled.div`
   width: 300px;
-  height: 100%;
+  height: calc(100% - 138px);
   position: absolute;
   background: rgba(255, 255, 255, 0.8);
-  top: 16px;
+  top: 104px;
   left: 16px;
   overflow: scroll;
   padding: 0 16px 16px 16px;
@@ -20,7 +18,6 @@ const Sidebar = styled.div`
 
 export default () => (
   <Sidebar>
-    <DevTools />
     <Itinerary />
   </Sidebar>
 );

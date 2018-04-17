@@ -5,9 +5,11 @@ const findItemById = (days, id) => {
   for (let i = 0; i < days.length; i += 1) {
     const foundItem = days[i].items.find(item => item.id === id);
     if (foundItem) {
-        return foundItem;
+      return foundItem;
     }
   }
+
+  return undefined;
 };
 
 const itinerary = extendObservable(this, {
