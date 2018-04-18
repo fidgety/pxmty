@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export default [
+export const days = [
   {
     date: moment(),
     items: [
@@ -34,5 +34,14 @@ export default [
         hovered: false,
       },
     ],
+  },
+];
+
+export const shortlist = [
+  {
+    name: "Barbican Centre",
+    id: `id-${Math.random()}`,
+    coords: [-0.093263, 51.520077],
+    hovered: false,
   },
 ];

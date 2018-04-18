@@ -1,24 +1,15 @@
 import {extendObservable} from "mobx";
-import testData from "./testData";
+import {days, shortlist} from "./testData";
 
-const findItemById = (days, id) => {
-  for (let i = 0; i < days.length; i += 1) {
-    const foundItem = days[i].items.find(item => item.id === id);
-    if (foundItem) {
-      return foundItem;
-    }
-  }
-
-  return undefined;
-};
+const findItemById = (daylist, id) => daylist.find(item => item.id === id);
 
 const itinerary = extendObservable(this, {
-  days: testData,
+  days,
+  shortlist,
   get items() {
-    return this.days.reduce(
-      (prev, next) => prev.concat(next.items.slice()),
-      [],
-    );
+    return this.days
+      .reduce((prev, next) => prev.concat(next.items.slice()), [])
+      .concat(this.shortlist.slice());
   },
   get fromDate() {
     return this.days[0].date;
@@ -29,23 +20,43 @@ const itinerary = extendObservable(this, {
   setDates(from, to) {
     const newItinerary = [];
     let currentDay = from;
+    let i = 0;
 
     while (currentDay <= to) {
       newItinerary.push({
         date: currentDay.clone(),
       });
+      newItinerary[i].items = this.days.length > i ? this.days[i].items : [];
+
       currentDay = currentDay.clone().add(1, "day");
+      i += 1;
     }
+
+    for (; i < this.days.length; i += 1) {
+      this.shortlist = this.shortlist.concat(this.days[i].items);
+    }
+
+    this.days = newItinerary;
   },
   moveItem(startIndex, movedFromDay, endIndex, movedToDay) {
-    const [removed] = this.days[movedFromDay].items.splice(startIndex, 1);
-    this.days[movedToDay].items.splice(endIndex, 0, removed);
+    const isShortlist = index => index.toString() === "NaN";
+
+    const fromArray = isShortlist(movedFromDay)
+      ? this.shortlist
+      : this.days[movedFromDay].items;
+
+    const toArray = isShortlist(movedToDay)
+      ? this.shortlist
+      : this.days[movedToDay].items;
+
+    const [removed] = fromArray.splice(startIndex, 1);
+    toArray.splice(endIndex, 0, removed);
   },
   hoverItem: id => {
-    findItemById(this.days, id).hovered = true;
+    findItemById(this.items, id).hovered = true;
   },
   leaveItem: id => {
-    findItemById(this.days, id).hovered = false;
+    findItemById(this.items, id).hovered = false;
   },
 });
 

@@ -39,6 +39,23 @@ const Itinerary = () => {
     </div>
   ));
 
+  Droppables.unshift(
+    <div key="shortlist">
+      <Header>Shortlist</Header>
+      <Droppable droppableId="shortlist">
+        {(provided, snapshot) => (
+          <Day
+            provided={provided}
+            snapshot={snapshot}
+            items={store.shortlist}
+            hoverItem={store.hoverItem}
+            leaveItem={store.leaveItem}
+          />
+        )}
+      </Droppable>
+    </div>,
+  );
+
   return <DragDropContext onDragEnd={onDragEnd}>{Droppables}</DragDropContext>;
 };
 
