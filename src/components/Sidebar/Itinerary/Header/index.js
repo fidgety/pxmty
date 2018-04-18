@@ -7,7 +7,6 @@ const HeaderDiv = styled.div`
   font-size: 20px;
   border-bottom: 1px solid red;
   padding: 16px;
-  font-family: sans-serif;
   background: #eee;
   margin: 16px 0 8px 0;
 `;

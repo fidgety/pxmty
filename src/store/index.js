@@ -20,6 +20,23 @@ const itinerary = extendObservable(this, {
       [],
     );
   },
+  get fromDate() {
+    return this.days[0].date;
+  },
+  get toDate() {
+    return this.days[this.days.length - 1].date;
+  },
+  setDates(from, to) {
+    const newItinerary = [];
+    let currentDay = from;
+
+    while (currentDay <= to) {
+      newItinerary.push({
+        date: currentDay.clone(),
+      });
+      currentDay = currentDay.clone().add(1, "day");
+    }
+  },
   moveItem(startIndex, movedFromDay, endIndex, movedToDay) {
     const [removed] = this.days[movedFromDay].items.splice(startIndex, 1);
     this.days[movedToDay].items.splice(endIndex, 0, removed);

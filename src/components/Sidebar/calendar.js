@@ -3,9 +3,22 @@ import DayPicker, {DateUtils} from "react-day-picker";
 import moment from "moment";
 import styled from "styled-components";
 
-const Dates = styled.div`
-  font-family: sans-serif;
+import store from "../../store";
+
+const ChangeDates = styled.button`
   padding: 16px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 8px;
+  margin-bottom: -8px;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+
+  &:hover {
+    background: lightblue;
+  }
 `;
 
 const DayPickerWrapper = styled.div`
@@ -31,31 +44,27 @@ export default class Example extends React.Component {
   }
   getInitialState() {
     return {
-      from: moment().toDate(),
-      to: moment()
-        .add(1, "day")
-        .toDate(),
+      from: store.fromDate.toDate(),
+      to: store.toDate.toDate(),
       show: false,
     };
   }
 
   handleDayClick(day) {
     const {from, to} = this.state;
-    // if (from && to && day >= from && day <= to) {
-    //   this.handleResetClick();
-    //
-    //   return;
-    // }
     if (isSelectingFirstDay(from, to, day)) {
       this.setState({
         from: day,
         to: null,
       });
     } else {
+      // dates chosen
       this.setState({
         to: day,
         show: false,
       });
+
+      store.setDates(moment(this.state.from), moment(day));
     }
   }
 
@@ -64,13 +73,16 @@ export default class Example extends React.Component {
     const modifiers = {start: from, end: to};
 
     return (
-      <div className="RangeExample">
-        <Dates onClick={() => this.setState({show: !show})}>
-          {from &&
-            to &&
-            `${moment(from).format("ddd Do MMMM")} -
-                ${moment(to).format("ddd Do MMMM")}`}{" "}
-        </Dates>
+      <div>
+        <ChangeDates
+          onClick={() => {
+            this.setState({
+              show: true,
+            });
+          }}
+        >
+          Change dates
+        </ChangeDates>
         {show && (
           <DayPickerWrapper>
             <DayPicker

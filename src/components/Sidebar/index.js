@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Itinerary from "./Itinerary";
+import Calendar from "./calendar";
 
 const Sidebar = styled.div`
   width: 300px;
@@ -18,6 +19,7 @@ const Sidebar = styled.div`
 
 export default () => (
   <Sidebar>
+    <Calendar />
     <Itinerary />
   </Sidebar>
 );

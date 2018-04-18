@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import Calendar from "./calendar";
-
 const TopBar = styled.div`
   width: calc(100% - 32px);
   height: 64px;
@@ -14,8 +12,4 @@ const TopBar = styled.div`
   z-index: 10;
 `;
 
-export default () => (
-  <TopBar>
-    <Calendar />
-  </TopBar>
-);
+export default () => <TopBar />;
