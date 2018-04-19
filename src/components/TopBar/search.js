@@ -1,11 +1,30 @@
 import React from "react";
+import styled from "styled-components";
 
-const google = window.google;
+const {google} = window;
+
+const Result = styled.li`
+  list-style: none;
+  padding: 8px 16px;
+  margin: 0px;
+
+  &:hover {
+    background: lightblue;
+    cursor: pointer;
+  }
+`;
+
+const Results = styled.ul`
+  padding: 0;
+  margin: 0;
+  width: 300px;
+  background: white;
+`;
 
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
-    // this.handleDayClick = this.handleDayClick.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.state = {
       results: [],
     };
@@ -34,11 +53,14 @@ export default class Search extends React.Component {
     );
   }
   render() {
-    const list = this.state.results.map(result => <ul>{result.name}</ul>);
+    const list = this.state.results.map(result => (
+      <Result>{result.name}</Result>
+    ));
 
     return (
       <div>
         <input type="text" onChange={this.onChange} />
+        <Results>{list}</Results>
       </div>
     );
   }
