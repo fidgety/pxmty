@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Search from "./search";
 
 const TopBar = styled.div`
   width: calc(100% - 32px);
@@ -12,4 +13,8 @@ const TopBar = styled.div`
   z-index: 10;
 `;
 
-export default () => <TopBar />;
+export default () => (
+  <TopBar>
+    <Search />
+  </TopBar>
+);

@@ -20,19 +20,19 @@ const MapAndMarkers = () => {
   ));
 
   return (
-    // <Map
-    //   // style="mapbox://styles/fidgety/cjfvmfqdr30ql2ssyt4n3mtm2"
-    // style="mapbox://styles/fidgety/cjg0ze2xx0zo22rqkfae914qm"// eslint-disable-line
-    //   // style="mapbox://styles/fidgety/cjfvmmbgy22e62rn2rvubheh5" // eslint-disable-line
-    //   containerStyle={{
-    //     height: "100vh",
-    //     width: "100vw",
-    //   }}
-    //   center={london}
-    // >
-    //   {Items}
-    // </Map>
-    <div />
+    <Map
+      // style="mapbox://styles/fidgety/cjfvmfqdr30ql2ssyt4n3mtm2"
+    style="mapbox://styles/fidgety/cjg0ze2xx0zo22rqkfae914qm"// eslint-disable-line
+      // style="mapbox://styles/fidgety/cjfvmmbgy22e62rn2rvubheh5" // eslint-disable-line
+      containerStyle={{
+        height: "100vh",
+        width: "100vw",
+      }}
+      center={london}
+    >
+      {Items}
+    </Map>
+    // <div />
   );
 };
 
