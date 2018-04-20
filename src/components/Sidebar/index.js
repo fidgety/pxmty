@@ -3,13 +3,14 @@ import styled from "styled-components";
 
 import Itinerary from "./Itinerary";
 import Calendar from "./calendar";
+import Search from "./Search";
 
 const Sidebar = styled.div`
   width: 300px;
-  height: calc(100% - 122px);
+  height: calc(100% - 48px);
   position: absolute;
   background: rgba(255, 255, 255, 0.8);
-  top: 86px;
+  top: 16px;
   left: 16px;
   overflow: scroll;
   padding: 0 16px 16px 16px;
@@ -19,6 +20,7 @@ const Sidebar = styled.div`
 
 export default () => (
   <Sidebar>
+    <Search />
     <Calendar />
     <Itinerary />
   </Sidebar>

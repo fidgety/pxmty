@@ -38,6 +38,14 @@ const itinerary = extendObservable(this, {
 
     this.days = newItinerary;
   },
+  addItemToShortlist(id, name, coords) {
+    this.shortlist.push({
+      id,
+      name,
+      coords,
+      hovered: false,
+    });
+  },
   moveItem(startIndex, movedFromDay, endIndex, movedToDay) {
     const isShortlist = index => index.toString() === "NaN";
 

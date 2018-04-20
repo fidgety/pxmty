@@ -1,7 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
+import store from "../../../store";
+
 const {google} = window;
+
+const Input = styled.input`
+  width: calc(100% - 18px);
+  padding: 16px 8px;
+  margin-top: 16px;
+  font-size: 18px;
+  border: 1px solid lightgrey;
+`;
 
 const Result = styled.li`
   list-style: none;
@@ -19,6 +29,7 @@ const Results = styled.ul`
   margin: 0;
   width: 300px;
   background: white;
+  position: absolute;
 `;
 
 export default class Search extends React.Component {
@@ -27,10 +38,17 @@ export default class Search extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.state = {
       results: [],
+      value: "",
     };
   }
+
   onChange(e) {
-    if (e.target.value.length < 3) {
+    const {value} = e.target;
+    this.setState({
+      value,
+    });
+
+    if (value.length < 3) {
       return;
     }
     const service = new google.maps.places.PlacesService(
@@ -38,10 +56,10 @@ export default class Search extends React.Component {
     );
     service.nearbySearch(
       {
-        keyword: e.target.value,
+        keyword: value,
         rankBy: google.maps.places.RankBy.PROMINENCE,
         location: new google.maps.LatLng(51.509865, -0.118092),
-        radius: 1000,
+        radius: 10000,
       },
       (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -52,14 +70,35 @@ export default class Search extends React.Component {
       },
     );
   }
+  resultSelected({id, name, geometry}) {
+    const coords = [geometry.location.lng(), geometry.location.lat()];
+
+    store.addItemToShortlist(id, name, coords);
+    this.setState({
+      value: "",
+      results: [],
+    });
+  }
   render() {
     const list = this.state.results.map(result => (
-      <Result>{result.name}</Result>
+      <Result
+        key={result.id}
+        onClick={() => {
+          this.resultSelected(result);
+        }}
+      >
+        {result.name}
+      </Result>
     ));
 
     return (
       <div>
-        <input type="text" onChange={this.onChange} />
+        <Input
+          placeholder="Add things to your list"
+          type="text"
+          onChange={this.onChange}
+          value={this.state.value}
+        />
         <Results>{list}</Results>
       </div>
     );
