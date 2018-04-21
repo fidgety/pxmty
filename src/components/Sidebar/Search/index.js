@@ -24,6 +24,15 @@ const Result = styled.li`
   }
 `;
 
+const ResultName = styled.p`
+  margin: 0 0 4px 0;
+`;
+
+const ResultAddress = styled.p`
+  margin: 0;
+  font-size: 12px;
+`;
+
 const Results = styled.ul`
   padding: 0;
   margin: 0;
@@ -87,7 +96,8 @@ export default class Search extends React.Component {
           this.resultSelected(result);
         }}
       >
-        {result.name}
+        <ResultName>{result.name}</ResultName>
+        <ResultAddress>{result.vicinity}</ResultAddress>
       </Result>
     ));
 
