@@ -1,6 +1,8 @@
 import {extendObservable} from "mobx";
 import {days, shortlist} from "./testData";
 
+import {getPlaceDetails} from "../utils/googlePlaces";
+
 const findItemById = (daylist, id) => daylist.find(item => item.id === id);
 
 const itinerary = extendObservable(this, {
@@ -65,6 +67,11 @@ const itinerary = extendObservable(this, {
   },
   leaveItem: id => {
     findItemById(this.items, id).hovered = false;
+  },
+  showItemDetail: id => {
+    getPlaceDetails(id).then(details => {
+      console.log(details);
+    });
   },
 });
 

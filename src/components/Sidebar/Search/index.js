@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import store from "../../../store";
 
-const {google} = window;
+import {nearbySearch} from "../../../utils/googlePlaces";
 
 const Input = styled.input`
   width: calc(100% - 18px);
@@ -60,29 +60,22 @@ export default class Search extends React.Component {
     if (value.length < 3) {
       return;
     }
-    const service = new google.maps.places.PlacesService(
-      document.getElementById("thing"),
-    );
-    service.nearbySearch(
-      {
-        keyword: value,
-        rankBy: google.maps.places.RankBy.PROMINENCE,
-        location: new google.maps.LatLng(51.509865, -0.118092),
-        radius: 10000,
-      },
-      (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          this.setState({results});
-        }
 
-        return [];
-      },
-    );
-  }
-  resultSelected({id, name, geometry}) {
+    nearbySearch({
+      keyword: value,
+      location: [51.509865, -0.118092],
+    })
+      .then(results => {
+        this.setState({results});
+      })
+      .catch(() => {
+        this.setState({results: []});
+      });
+  } // eslint-disable-next-line camelcase
+  resultSelected({place_id, name, geometry}) {
     const coords = [geometry.location.lng(), geometry.location.lat()];
 
-    store.addItemToShortlist(id, name, coords);
+    store.addItemToShortlist(place_id, name, coords);
     this.setState({
       value: "",
       results: [],
@@ -91,7 +84,7 @@ export default class Search extends React.Component {
   render() {
     const list = this.state.results.map(result => (
       <Result
-        key={result.id}
+        key={result.place_id}
         onClick={() => {
           this.resultSelected(result);
         }}

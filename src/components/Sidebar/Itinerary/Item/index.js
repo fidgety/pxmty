@@ -15,6 +15,7 @@ const Item = props => (
         id={props.id}
         hoverItem={props.hoverItem}
         leaveItem={props.leaveItem}
+        clickItem={props.clickItem}
       />
     )}
   </Draggable>
@@ -27,6 +28,7 @@ Item.propTypes = {
   hovered: bool,
   hoverItem: func,
   leaveItem: func,
+  clickItem: func,
 };
 
 export default Item;

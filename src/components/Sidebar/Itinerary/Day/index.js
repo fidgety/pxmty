@@ -10,7 +10,14 @@ const DayStyles = styled.div`
   min-height: 30px;
 `;
 
-const DayDropZone = ({provided, snapshot, items, hoverItem, leaveItem}) => (
+const DayDropZone = ({
+  provided,
+  snapshot,
+  items,
+  hoverItem,
+  leaveItem,
+  clickItem,
+}) => (
   <DayStyles
     innerRef={provided.innerRef}
     isDraggingOver={snapshot.isDraggingOver}
@@ -22,6 +29,7 @@ const DayDropZone = ({provided, snapshot, items, hoverItem, leaveItem}) => (
         key={item.name}
         hoverItem={hoverItem}
         leaveItem={leaveItem}
+        clickItem={clickItem}
       />
     ))}
     {provided.placeholder}
@@ -34,6 +42,7 @@ DayDropZone.propTypes = {
   items: object, // eslint-disable-line
   hoverItem: func,
   leaveItem: func,
+  clickItem: func,
 };
 
 export default observer(DayDropZone);

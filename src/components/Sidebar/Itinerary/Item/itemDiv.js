@@ -31,10 +31,11 @@ const ItemDiv = ({
   name,
   hoverItem,
   leaveItem,
+  clickItem,
   hovered,
   id,
 }) => (
-  <div
+  <div // eslint-disable-line
     ref={providedItem.innerRef}
     {...providedItem.draggableProps}
     {...providedItem.dragHandleProps}
@@ -47,6 +48,7 @@ const ItemDiv = ({
     onMouseOut={() => leaveItem(id)}
     onFocus={() => hoverItem(id)}
     onBlur={() => leaveItem(id)}
+    onClick={() => clickItem(id)}
   >
     {name}
   </div>
@@ -58,6 +60,7 @@ ItemDiv.propTypes = {
   name: string,
   hoverItem: func,
   leaveItem: func,
+  clickItem: func,
   hovered: bool,
   id: string,
 };
