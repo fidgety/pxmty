@@ -7,6 +7,7 @@ const findItemById = (daylist, id) => daylist.find(item => item.id === id);
 
 const itinerary = extendObservable(this, {
   days,
+  selectedItemDetails: undefined,
   shortlist,
   get items() {
     return this.days
@@ -70,7 +71,7 @@ const itinerary = extendObservable(this, {
   },
   showItemDetail: id => {
     getPlaceDetails(id).then(details => {
-      console.log(details);
+      this.selectedItemDetails = details;
     });
   },
 });

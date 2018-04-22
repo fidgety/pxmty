@@ -18,6 +18,9 @@ const getItemStyle = (isDragging, draggableStyle, hovered) => {
     padding: "16px",
     marginBottom: "8px",
     background,
+    transition: "background 0.2s linear",
+    transitionProperty: "background",
+    transitionDuration: "0.2s",
     fontFamily: "sans-serif",
 
     // styles we need to apply on draggables

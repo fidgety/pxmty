@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Map from "./components/Map";
 import Sidebar from "./components/Sidebar";
+import SelectedItemDetails from "./components/SelectedItemDetails";
 // import TopBar from "./components/TopBar";
 import DevTools from "mobx-react-devtools";
 
@@ -14,5 +15,6 @@ export default () => (
     <DevTools />
     <Map />
     <Sidebar />
+    <SelectedItemDetails />
   </Main>
 );

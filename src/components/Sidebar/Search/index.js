@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import store from "../../../store";
+import store from "store";
+import {background} from "utils/style/transitions";
 
-import {nearbySearch} from "../../../utils/googlePlaces";
+import {nearbySearch} from "utils/googlePlaces";
 
 const Input = styled.input`
   width: calc(100% - 18px);
@@ -11,12 +12,17 @@ const Input = styled.input`
   margin-top: 16px;
   font-size: 18px;
   border: 1px solid lightgrey;
+  transition: ${background};
+  &:hover {
+    background: pink;
+  }
 `;
 
 const Result = styled.li`
   list-style: none;
   padding: 8px 16px;
   margin: 0px;
+  transition: ${background};
 
   &:hover {
     background: lightblue;

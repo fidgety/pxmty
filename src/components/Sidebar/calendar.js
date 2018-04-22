@@ -3,7 +3,8 @@ import DayPicker, {DateUtils} from "react-day-picker";
 import moment from "moment";
 import styled from "styled-components";
 
-import store from "../../store";
+import store from "store";
+import {background} from "utils/style/transitions";
 
 const ChangeDates = styled.button`
   padding: 16px;
@@ -15,6 +16,7 @@ const ChangeDates = styled.button`
   border: none;
   background: #ccc;
   cursor: pointer;
+  transition: ${background}
 
   &:hover {
     background: lightblue;

@@ -1,3 +1,7 @@
 {
-  "extends": "eslint-config-with-prettier"
+  "extends": "eslint-config-with-prettier",
+  "rules": {
+      "import/no-unresolved": 0,
+      "import/extensions": 0,
+  }
 }

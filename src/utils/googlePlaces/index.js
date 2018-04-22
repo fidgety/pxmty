@@ -1,7 +1,8 @@
 const {google} = window;
 const service = new google.maps.places.PlacesService(
-  document.getElementById("thing"),
+  document.getElementById("thing-for-maps-to-work"),
 );
+const cachedPlaceDetails = {};
 
 export const nearbySearch = ({keyword, location}) =>
   new Promise((resolve, reject) => {
@@ -23,13 +24,20 @@ export const nearbySearch = ({keyword, location}) =>
   });
 
 export const getPlaceDetails = id =>
+  // eslint-disable-next-line consistent-return
   new Promise((resolve, reject) => {
+    if (cachedPlaceDetails[id]) {
+      return resolve(cachedPlaceDetails[id]);
+    }
+
     service.getDetails(
       {
         placeId: id,
       },
       (details, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
+          cachedPlaceDetails[id] = details;
+
           return resolve(details);
         }
 
