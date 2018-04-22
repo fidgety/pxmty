@@ -74,6 +74,9 @@ const itinerary = extendObservable(this, {
       this.selectedItemDetails = details;
     });
   },
+  hideItemDetail: () => {
+    this.selectedItemDetails = undefined;
+  },
 });
 
 export default itinerary;
