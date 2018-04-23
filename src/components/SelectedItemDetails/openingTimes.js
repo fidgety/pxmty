@@ -1,7 +1,25 @@
 /* eslint camelcase: 0 */
 import React from "react";
+import styled from "styled-components";
 
 import {object, bool} from "prop-types";
+
+import Panel from "./Shared/Panel";
+
+const OpeningTimesList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+const Row = styled.li`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+`;
+
+const Day = styled.span`
+  font-weight: bold;
+`;
 
 const OpeningTimes = ({weekday_text, open_now}) => {
   if (!weekday_text) {
@@ -12,18 +30,18 @@ const OpeningTimes = ({weekday_text, open_now}) => {
     const [day, time] = openingTime.split(": ");
 
     return (
-      <li key={day}>
-        <span>{day}</span>
+      <Row key={day}>
+        <Day>{day}</Day>
         <span>{time}</span>
-      </li>
+      </Row>
     );
   });
 
   return (
-    <div>
+    <Panel>
       {open_now && <div>open now</div>}
-      <ul>{times}</ul>
-    </div>
+      <OpeningTimesList>{times}</OpeningTimesList>
+    </Panel>
   );
 };
 

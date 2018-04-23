@@ -3,6 +3,8 @@ import React from "react";
 import {string} from "prop-types";
 import styled from "styled-components";
 
+import Panel from "./Shared/Panel";
+
 const Name = styled.h1`
   font-size: 22px;
   margin: 0 0 4px 0;
@@ -26,10 +28,6 @@ const Number = styled.div`
 
 const A = styled.a`
   color: pink;
-`;
-
-const Panel = styled.div`
-  margin-bottom: 16px;
 `;
 
 const MainInfo = ({name, address, phoneNumber, website}) => (

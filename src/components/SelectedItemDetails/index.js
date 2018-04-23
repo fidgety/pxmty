@@ -7,9 +7,11 @@ import styled from "styled-components";
 import store from "store";
 
 import MainInfo from "./MainInfo";
-import Carousel from "./carousel";
-import OpeningTimes from "./openingTimes";
-import Reviews from "./reviews";
+import Carousel from "./Carousel";
+import OpeningTimes from "./OpeningTimes";
+import Reviews from "./Reviews";
+
+import {background} from "utils/style/transitions";
 
 const Sidebar = styled.div`
   position: absolute;
@@ -19,6 +21,23 @@ const Sidebar = styled.div`
   z-index: 50;
   background: white;
   padding: 16px;
+`;
+
+const Close = styled.button`
+  border: none;
+  background: lightblue;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  padding: 10px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: ${background}
+
+  &:hover {
+      background: pink;
+  }
 `;
 
 const SelectedItemDetails = () => {
@@ -38,7 +57,7 @@ const SelectedItemDetails = () => {
 
   return (
     <Sidebar>
-      <button onClick={store.hideItemDetail}>close</button>
+      <Close onClick={store.hideItemDetail}>X</Close>
       <MainInfo
         name={name}
         address={formatted_address}
