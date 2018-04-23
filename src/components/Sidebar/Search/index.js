@@ -82,6 +82,7 @@ export default class Search extends React.Component {
     const coords = [geometry.location.lng(), geometry.location.lat()];
 
     store.addItemToShortlist(place_id, name, coords);
+    store.showItemDetail(place_id);
     this.setState({
       value: "",
       results: [],

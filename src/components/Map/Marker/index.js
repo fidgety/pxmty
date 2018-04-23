@@ -8,6 +8,7 @@ const MarkerDiv = styled.div`
   background: ${props => (props.hovered ? "pink" : "white")};
   transition: ${background};
   cursor: pointer;
+  padding: 0 4px;
 `;
 
 const Item = ({
