@@ -3,7 +3,7 @@ import {object} from "prop-types";
 
 import {Carousel} from "react-responsive-carousel";
 
-import Panel from "./Shared/Panel";
+import Panel from "../Shared/Panel";
 
 import "react-responsive-carousel/lib/styles/carousel.css";
 

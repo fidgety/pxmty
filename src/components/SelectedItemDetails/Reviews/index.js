@@ -3,7 +3,7 @@ import React from "react";
 import {object} from "prop-types";
 import styled from "styled-components";
 
-import Panel from "./Shared/Panel";
+import Panel from "../Shared/Panel";
 
 const List = styled.ul`
   list-style: none;

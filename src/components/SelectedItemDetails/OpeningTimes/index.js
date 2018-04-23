@@ -4,7 +4,14 @@ import styled from "styled-components";
 
 import {object, bool} from "prop-types";
 
-import Panel from "./Shared/Panel";
+import Panel from "../Shared/Panel";
+
+const OpenNow = styled.div`
+  text-align: center;
+  background: pink;
+  padding: 8px;
+  text-transform: capitalize;
+`;
 
 const OpeningTimesList = styled.ul`
   list-style: none;
@@ -39,7 +46,7 @@ const OpeningTimes = ({weekday_text, open_now}) => {
 
   return (
     <Panel>
-      {open_now && <div>open now</div>}
+      {open_now && <OpenNow>open now</OpenNow>}
       <OpeningTimesList>{times}</OpeningTimesList>
     </Panel>
   );
