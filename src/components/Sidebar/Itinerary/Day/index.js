@@ -17,6 +17,7 @@ const DayDropZone = ({
   hoverItem,
   leaveItem,
   clickItem,
+  removeItem,
 }) => (
   <DayStyles
     innerRef={provided.innerRef}
@@ -30,6 +31,7 @@ const DayDropZone = ({
         hoverItem={hoverItem}
         leaveItem={leaveItem}
         clickItem={clickItem}
+        removeItem={removeItem}
       />
     ))}
     {provided.placeholder}
@@ -43,6 +45,7 @@ DayDropZone.propTypes = {
   hoverItem: func,
   leaveItem: func,
   clickItem: func,
+  removeItem: func,
 };
 
 export default observer(DayDropZone);

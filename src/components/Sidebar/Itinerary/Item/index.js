@@ -16,6 +16,7 @@ const Item = props => (
         hoverItem={props.hoverItem}
         leaveItem={props.leaveItem}
         clickItem={props.clickItem}
+        removeItem={props.removeItem}
       />
     )}
   </Draggable>
@@ -29,6 +30,7 @@ Item.propTypes = {
   hoverItem: func,
   leaveItem: func,
   clickItem: func,
+  removeItem: func,
 };
 
 export default Item;

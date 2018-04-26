@@ -49,6 +49,18 @@ const itinerary = extendObservable(this, {
       hovered: false,
     });
   },
+  removeItem: id => {
+    this.days = this.days.reduce((arr, day) => {
+      arr.push({
+        date: day.date,
+        items: day.items.filter(item => item.id !== id),
+      });
+
+      return arr;
+    }, []);
+
+    this.shortlist = this.shortlist.filter(item => item.id !== id);
+  },
   moveItem(startIndex, movedFromDay, endIndex, movedToDay) {
     const isShortlist = index => index.toString() === "NaN";
 

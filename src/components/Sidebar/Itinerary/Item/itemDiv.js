@@ -1,6 +1,20 @@
 import React from "react";
 import {object, string, func, bool} from "prop-types";
 import {observer} from "mobx-react";
+import styled from "styled-components";
+
+const Delete = styled.div`
+  background: lightblue;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  cursor: pointer;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const getItemStyle = (isDragging, draggableStyle, hovered) => {
   let background = "#eee";
@@ -35,10 +49,11 @@ const ItemDiv = ({
   hoverItem,
   leaveItem,
   clickItem,
+  removeItem,
   hovered,
   id,
 }) => (
-  <div // eslint-disable-line
+  <Container // eslint-disable-line
     ref={providedItem.innerRef}
     {...providedItem.draggableProps}
     {...providedItem.dragHandleProps}
@@ -53,8 +68,16 @@ const ItemDiv = ({
     onBlur={() => leaveItem(id)}
     onClick={() => clickItem(id)}
   >
-    {name}
-  </div>
+    <span>{name}</span>
+    <Delete
+      onClick={e => {
+        e.stopPropigation();
+        removeItem(id);
+      }}
+    >
+      x
+    </Delete>
+  </Container>
 );
 
 ItemDiv.propTypes = {
@@ -64,6 +87,7 @@ ItemDiv.propTypes = {
   hoverItem: func,
   leaveItem: func,
   clickItem: func,
+  removeItem: func,
   hovered: bool,
   id: string,
 };

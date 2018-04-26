@@ -34,6 +34,7 @@ const Itinerary = () => {
             hoverItem={store.hoverItem}
             leaveItem={store.leaveItem}
             clickItem={store.showItemDetail}
+            removeItem={store.removeItem}
           />
         )}
       </Droppable>
@@ -52,6 +53,7 @@ const Itinerary = () => {
             hoverItem={store.hoverItem}
             leaveItem={store.leaveItem}
             clickItem={store.showItemDetail}
+            removeItem={store.removeItem}
           />
         )}
       </Droppable>
