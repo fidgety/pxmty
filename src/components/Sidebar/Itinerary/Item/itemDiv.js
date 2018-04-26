@@ -53,7 +53,7 @@ const ItemDiv = ({
   hovered,
   id,
 }) => (
-  <Container // eslint-disable-line
+  <div // eslint-disable-line
     ref={providedItem.innerRef}
     {...providedItem.draggableProps}
     {...providedItem.dragHandleProps}
@@ -68,16 +68,18 @@ const ItemDiv = ({
     onBlur={() => leaveItem(id)}
     onClick={() => clickItem(id)}
   >
-    <span>{name}</span>
-    <Delete
-      onClick={e => {
-        e.stopPropigation();
-        removeItem(id);
-      }}
-    >
-      x
-    </Delete>
-  </Container>
+    <Container>
+      <span>{name}</span>
+      <Delete
+        onClick={e => {
+          e.stopPropagation();
+          removeItem(id);
+        }}
+      >
+        x
+      </Delete>
+    </Container>
+  </div>
 );
 
 ItemDiv.propTypes = {
