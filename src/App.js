@@ -1,20 +1,25 @@
 import React from "react";
-import styled from "styled-components";
-import Map from "./components/Map";
-import Sidebar from "./components/Sidebar";
-import SelectedItemDetails from "./components/SelectedItemDetails";
-// import TopBar from "./components/TopBar";
-import DevTools from "mobx-react-devtools";
+import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
 
-const Main = styled.div`
-  background: grey;
-`;
+import Planner from "pages/Planner";
 
 export default () => (
-  <Main className="App">
-    <DevTools />
-    <Map />
-    <Sidebar />
-    <SelectedItemDetails />
-  </Main>
+  <Router>
+    <div>
+      <Route path="/plan/:location/:id" component={Planner} />
+      <Route path="/plan/:location" exact>
+        {({match}) => {
+          if (!match) {
+            return null;
+          }
+
+          return (
+            <Redirect
+              to={`/plan/${match.params.location}/${Math.random() * 1000000}`}
+            />
+          );
+        }}
+      </Route>
+    </div>
+  </Router>
 );

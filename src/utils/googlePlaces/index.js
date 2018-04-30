@@ -1,4 +1,5 @@
 const {google} = window;
+
 const service = new google.maps.places.PlacesService(
   document.getElementById("thing-for-maps-to-work"),
 );

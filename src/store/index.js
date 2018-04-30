@@ -1,14 +1,20 @@
 import {extendObservable} from "mobx";
 import {days, shortlist} from "./testData";
+import moment from "moment";
 
 import {getPlaceDetails} from "../utils/googlePlaces";
 
 const findItemById = (daylist, id) => daylist.find(item => item.id === id);
 
 const itinerary = extendObservable(this, {
-  days,
+  days: [
+    {
+      date: moment(),
+      items: [],
+    },
+  ],
   selectedItemDetails: undefined,
-  shortlist,
+  shortlist: [],
   get items() {
     return this.days
       .reduce((prev, next) => prev.concat(next.items.slice()), [])
@@ -89,6 +95,14 @@ const itinerary = extendObservable(this, {
   hideItemDetail: () => {
     this.selectedItemDetails = undefined;
   },
+  getSavedState: () => {
+    setTimeout(() => {
+      this.shortlist = shortlist;
+      this.days = days;
+    }, 10);
+  },
 });
+
+this.getSavedState();
 
 export default itinerary;
