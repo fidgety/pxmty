@@ -7,6 +7,7 @@ import {getPlaceDetails} from "../utils/googlePlaces";
 const findItemById = (daylist, id) => daylist.find(item => item.id === id);
 
 const itinerary = extendObservable(this, {
+  id: "",
   days: [
     {
       date: moment(),
@@ -95,11 +96,31 @@ const itinerary = extendObservable(this, {
   hideItemDetail: () => {
     this.selectedItemDetails = undefined;
   },
+  saveInitialState: planId => {
+    this.id = planId;
+    this.saveState();
+  },
+  saveState: () => {
+    const payload = {
+      days: this.days,
+      sortlist: this.shortlist,
+      id: this.id,
+    };
+    const host = "http://localhost:3007";
+    fetch(`${host}/itineraries`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  },
   getSavedState: () => {
-    setTimeout(() => {
-      this.shortlist = shortlist;
-      this.days = days;
-    }, 10);
+    // setTimeout(() => {
+    //   this.shortlist = shortlist;
+    //   this.days = days;
+    // }, 10);
   },
 });
 
