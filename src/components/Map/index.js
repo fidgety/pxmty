@@ -16,7 +16,7 @@ const Map = ReactMapboxGl({
 
 const MapAndMarkers = () => {
   const Items = store.items.map(item => (
-    <Marker {...item} {...store} key={item.name} />
+    <Marker {...store} {...item} key={item.name} />
   ));
 
   return (
@@ -32,7 +32,6 @@ const MapAndMarkers = () => {
     >
       {Items}
     </Map>
-    // <div />
   );
 };
 

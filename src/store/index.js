@@ -1,5 +1,5 @@
 import {extendObservable} from "mobx";
-import {days, shortlist} from "./testData";
+import {saveItinerary, loadItinerary} from "./api";
 import moment from "moment";
 
 import {getPlaceDetails} from "../utils/googlePlaces";
@@ -55,6 +55,7 @@ const itinerary = extendObservable(this, {
       coords,
       hovered: false,
     });
+    this.saveState();
   },
   removeItem: id => {
     this.days = this.days.reduce((arr, day) => {
@@ -101,29 +102,24 @@ const itinerary = extendObservable(this, {
     this.saveState();
   },
   saveState: () => {
-    const payload = {
+    saveItinerary({
       days: this.days,
-      sortlist: this.shortlist,
+      shortlist: this.shortlist,
       id: this.id,
-    };
-    const host = "http://localhost:3007";
-    fetch(`${host}/itineraries`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
     });
   },
-  getSavedState: () => {
-    // setTimeout(() => {
-    //   this.shortlist = shortlist;
-    //   this.days = days;
-    // }, 10);
+  getSavedState: planId => {
+    this.id = planId;
+    loadItinerary(planId).then(json => {
+      if (json) {
+        this.days = json.days.map(({date, items}) => ({
+          date: moment(date),
+          items,
+        }));
+        json.shortlist.forEach(item => this.shortlist.push(item));
+      }
+    });
   },
 });
-
-this.getSavedState();
 
 export default itinerary;
