@@ -47,6 +47,7 @@ const itinerary = extendObservable(this, {
     }
 
     this.days = newItinerary;
+    this.saveState();
   },
   addItemToShortlist(id, name, coords) {
     this.shortlist.push({
@@ -68,6 +69,7 @@ const itinerary = extendObservable(this, {
     }, []);
 
     this.shortlist = this.shortlist.filter(item => item.id !== id);
+    this.saveState();
   },
   moveItem(startIndex, movedFromDay, endIndex, movedToDay) {
     const isShortlist = index => index.toString() === "NaN";
@@ -82,6 +84,7 @@ const itinerary = extendObservable(this, {
 
     const [removed] = fromArray.splice(startIndex, 1);
     toArray.splice(endIndex, 0, removed);
+    this.saveState();
   },
   hoverItem: id => {
     findItemById(this.items, id).hovered = true;
@@ -96,10 +99,6 @@ const itinerary = extendObservable(this, {
   },
   hideItemDetail: () => {
     this.selectedItemDetails = undefined;
-  },
-  saveInitialState: planId => {
-    this.id = planId;
-    this.saveState();
   },
   saveState: () => {
     saveItinerary({
