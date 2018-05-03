@@ -11,7 +11,7 @@ const london = [-0.127758, 51.507351];
 
 const Map = ReactMapboxGl({
   accessToken:
-    "pk.eyJ1IjoiZmlkZ2V0eSIsImEiOiJjamZ2bHFqaTMwMWxhMzNxYWRwazRsZnI1In0.9cE8KDydvJF8MatzYAwVQQ",
+    "pk.eyJ1IjoiZmlkZ2V0eSIsImEiOiJjamdvcDh4dGEwOWhvMndvMmxmcGMwMmgwIn0.lgVwFwF7oMw5sUrDYpFP8g",
 });
 
 const MapAndMarkers = () => {

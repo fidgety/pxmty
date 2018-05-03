@@ -25,11 +25,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "surge --domain pxmty.surge.sh --project ./build"
   },
   "devDependencies": {
     "eslint-config-with-prettier": "^3.2.1",
-    "gh-pages": "^1.1.0"
-  },
-  "homepage": "http://fidgety.github.io/pxmty"
+    "surge": "^0.20.1"
+  }
 }

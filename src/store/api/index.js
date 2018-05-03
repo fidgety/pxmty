@@ -1,4 +1,6 @@
-const host = "http://localhost:3007";
+const local = window.location.hostname.indexOf("localhost") !== -1;
+
+const host = local ? "http://localhost:3007/v2" : "https://api.vicin.co.uk/v2";
 
 export const saveItinerary = payload => {
   fetch(`${host}/itineraries/save`, {
