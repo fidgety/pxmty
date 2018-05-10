@@ -12,7 +12,7 @@ export const nearbySearch = ({keyword, location}) =>
         keyword,
         location: new google.maps.LatLng(location[0], location[1]),
         rankBy: google.maps.places.RankBy.PROMINENCE,
-        radius: 10000,
+        radius: 1000000,
       },
       (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {

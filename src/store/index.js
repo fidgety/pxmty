@@ -1,4 +1,4 @@
-import {extendObservable} from "mobx";
+import {extendObservable, transaction} from "mobx";
 import {saveItinerary, loadItinerary} from "./api";
 import moment from "moment";
 
@@ -111,11 +111,13 @@ const itinerary = extendObservable(this, {
     this.id = planId;
     loadItinerary(planId).then(json => {
       if (json) {
-        this.days = json.days.map(({date, items}) => ({
-          date: moment(date),
-          items,
-        }));
-        json.shortlist.forEach(item => this.shortlist.push(item));
+        transaction(() => {
+          this.days = json.days.map(({date, items}) => ({
+            date: moment(date),
+            items,
+          }));
+          json.shortlist.forEach(item => this.shortlist.push(item));
+        });
       }
     });
   },
