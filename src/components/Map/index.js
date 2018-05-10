@@ -22,8 +22,9 @@ const MapAndMarkers = () => {
     <Marker {...store} {...item} key={item.name} />
   ));
 
-  if (!bounds) {
-    bounds = getBounds(store.items.map(({coords}) => coords));
+  const newBounds = getBounds(store.items.map(({coords}) => coords));
+  if (!bounds || (newBounds && newBounds.toString() !== bounds.toString())) {
+    bounds = newBounds;
   }
 
   return (
