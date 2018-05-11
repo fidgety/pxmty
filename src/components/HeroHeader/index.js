@@ -16,12 +16,8 @@ const Hero = styled.div`
   padding: 10px 10px 0 10px;
 `;
 
-export default class HomeHeader extends React.Component {
-  render() {
-    return (
-      <Hero>
-        <div className="fb" />
-      </Hero>
-    );
-  }
-}
+export default () => (
+  <Hero>
+    <div className="fb" />
+  </Hero>
+);

@@ -8,7 +8,7 @@ import getBounds from "utils/getBounds";
 
 import Marker from "./Marker";
 
-const london = [-0.127758, 52.507351];
+const london = [-0.127758, 51.507351];
 
 const Map = ReactMapboxGl({
   accessToken:
