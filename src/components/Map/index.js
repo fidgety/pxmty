@@ -9,6 +9,8 @@ import getBounds from "utils/getBounds";
 import Marker from "./Marker";
 
 const london = [-0.127758, 51.507351];
+const boundsChanged = (bounds, newBounds) =>
+  newBounds && newBounds.toString() !== bounds.toString();
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -23,7 +25,7 @@ const MapAndMarkers = () => {
   ));
 
   const newBounds = getBounds(store.items.map(({coords}) => coords));
-  if (!bounds || (newBounds && newBounds.toString() !== bounds.toString())) {
+  if (!bounds || boundsChanged(bounds, newBounds)) {
     bounds = newBounds;
   }
 
