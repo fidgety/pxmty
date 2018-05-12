@@ -24,6 +24,15 @@ const MapAndMarkers = () => {
     <Marker {...store} {...item} key={item.name} />
   ));
 
+  // const {coords: focusedThing} = store.items.find(item => item.hovered) || {};
+  console.log(store.selectedItemDetails, store);
+  const {coords: focusedThing} = store.selectedItemDetails || {};
+
+  let a;
+  if (focusedThing) {
+    a = [[focusedThing[0]], [focusedThing[1]]];
+  }
+
   const newBounds = getBounds(store.items.map(({coords}) => coords));
   if (!bounds || boundsChanged(bounds, newBounds)) {
     bounds = newBounds;
@@ -36,9 +45,12 @@ const MapAndMarkers = () => {
         height: "100vh",
         width: "100vw",
       }}
-      center={london}
+      center={a || london}
       fitBounds={bounds}
       fitBoundsOptions={{
+        offset: [200, 0],
+      }}
+      flyToOptions={{
         offset: [200, 0],
       }}
     >

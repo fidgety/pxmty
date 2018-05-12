@@ -94,7 +94,12 @@ const itinerary = extendObservable(this, {
   },
   showItemDetail: id => {
     getPlaceDetails(id).then(details => {
-      this.selectedItemDetails = details;
+      this.selectedItemDetails = Object.assign(details, {
+        coords: [
+          details.geometry.location.lng(),
+          details.geometry.location.lat(),
+        ],
+      });
     });
   },
   hideItemDetail: () => {
