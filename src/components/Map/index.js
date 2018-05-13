@@ -7,6 +7,7 @@ import store from "../../store";
 import getBounds from "utils/getBounds";
 
 import Marker from "./Marker";
+import SelectedItem from "./SelectedItem";
 
 const london = [-0.127758, 51.507351];
 const boundsChanged = (bounds, newBounds) =>
@@ -24,14 +25,14 @@ const MapAndMarkers = () => {
     <Marker {...store} {...item} key={item.name} />
   ));
 
-  // const {coords: focusedThing} = store.items.find(item => item.hovered) || {};
-  console.log(store.selectedItemDetails, store);
-  const {coords: focusedThing} = store.selectedItemDetails || {};
+  const SelectedItemMarker = store.selectedItemDetails ? (
+    <SelectedItem {...store.selectedItemDetails} key="selectedItem" />
+  ) : null;
 
-  let a;
-  if (focusedThing) {
-    a = [[focusedThing[0]], [focusedThing[1]]];
-  }
+  const {coords: focusedItemCoords} = store.items.find(item => item.hovered) ||
+    store.selectedItemDetails || {coords: {}};
+
+  const center = focusedItemCoords.toJS ? focusedItemCoords.toJS() : london;
 
   const newBounds = getBounds(store.items.map(({coords}) => coords));
   if (!bounds || boundsChanged(bounds, newBounds)) {
@@ -45,7 +46,7 @@ const MapAndMarkers = () => {
         height: "100vh",
         width: "100vw",
       }}
-      center={a || london}
+      center={center}
       fitBounds={bounds}
       fitBoundsOptions={{
         offset: [200, 0],
@@ -55,6 +56,7 @@ const MapAndMarkers = () => {
       }}
     >
       {Items}
+      {SelectedItemMarker}
     </Map>
   );
 };
