@@ -54,6 +54,7 @@ const itinerary = extendObservable(this, {
       id,
       name,
       coords,
+      hovered: false,
     });
     this.saveState();
   },
