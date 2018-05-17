@@ -8,8 +8,8 @@ import Home from "./pages/Home";
 export default () => (
   <Router>
     <Switch>
-      <Route path="/plan/:location/:id" component={Planner} />
-      <Route path="/plan/:location" exact component={NewPlan} />
+      <Route path="/plan/:id" component={Planner} />
+      <Route path="/plan" exact component={NewPlan} />
       <Route path="*" component={Home} />
     </Switch>
   </Router>

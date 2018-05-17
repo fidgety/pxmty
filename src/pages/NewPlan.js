@@ -9,7 +9,7 @@ const NewPlan = ({match}) => {
     return null;
   }
 
-  return <Redirect to={`/plan/${match.params.location}/${GUID}`} />;
+  return <Redirect to={`/plan/${GUID}`} />;
 };
 
 NewPlan.propTypes = {
