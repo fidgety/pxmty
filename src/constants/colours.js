@@ -1,0 +1,27 @@
+export default {
+  logoRed: "#f14440",
+  orange: "#e94e1b",
+  black: "#000",
+  white: "#fff",
+  lightBlue: "#b9f9fb",
+  midnightBlue: "#231f5f",
+  lightGrey: "#f5f5fc",
+  grey: "#676565",
+  green: "#12A543",
+  darkGrey: "#666666",
+  slate: "#777",
+  gold: "#b8860b",
+
+  twitter: "#1a9bfa",
+  facebook: "#466bc9",
+  google: "#e53427",
+
+  attraction: "#6a78d5",
+  restaurant: "#78abb6",
+  hotel: "#ffab2e",
+  event: "#239683",
+  other: "#ce97ea",
+  bar: "#985557",
+  coffee: "#a27250",
+  burger: "#e5cb7a",
+};
