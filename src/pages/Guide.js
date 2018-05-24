@@ -1,11 +1,11 @@
 import React from "react";
-import {observer} from "mobx-react";
-import {string} from "prop-types";
+import {object} from "prop-types";
 import styled from "styled-components";
 import breakpoints from "constants/breakpoints";
 import colours from "constants/colours";
 import Map from "components/Map";
 import GuideList from "components/GuideList";
+import store from "store";
 
 import Guides from "data/guides";
 
@@ -13,10 +13,12 @@ const GuideDiv = styled.div`
   background: ${colours.grey};
 `;
 
-const Guide = ({slug}) => {
+const Guide = ({match}) => {
+  const {slug} = match.params;
   const selectedGuide = Guides.find(d => d.slug === slug.toLowerCase());
-
-  return (
+  console.log("Selected", selectedGuide);
+  
+return (
     <GuideDiv className="App">
       <Map />
       <GuideList guides={selectedGuide} />
@@ -25,7 +27,7 @@ const Guide = ({slug}) => {
 };
 
 Guide.propTypes = {
-  slug: string,
+  match: object //eslint-disable-line
 };
 
-export default observer(Guide);
+export default Guide;

@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import {object} from "prop-types";
+import {object, string} from "prop-types";
 
 const CardDiv = styled.div``;
 
-const Card = () => <CardDiv />;
+const Card = ({name}) => <CardDiv>{name}</CardDiv>;
 
 Card.propTypes = {
-  guides: object,  //eslint-disable-line
+  name: string,  //eslint-disable-line
 };
 
 export default Card;
