@@ -29,7 +29,7 @@ const MapAndMarkers = () => {
     <SelectedItem {...store.selectedItemDetails} key="selectedItem" />
   ) : null;
 
-  const {coords: focusedItemCoords} = store.items.find(item => item.hovered) ||
+  const {coords: focusedItemCoords} = store.items.find(item => item.focused) ||
     store.selectedItemDetails || {coords: {}};
 
   const center = focusedItemCoords.toJS ? focusedItemCoords.toJS() : london;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {background} from "utils/style/transitions";
 
 const MarkerDiv = styled.div`
-  background: ${props => (props.hovered ? "pink" : "white")};
+  background: ${props => (props.focused ? "pink" : "white")};
   transition: ${background};
   cursor: pointer;
   padding: 0 4px;
@@ -15,6 +15,7 @@ const Item = ({
   coords,
   name,
   id,
+  focused,
   hovered,
   hoverItem,
   leaveItem,
@@ -23,11 +24,11 @@ const Item = ({
   <Marker
     coordinates={coords.slice()}
     style={{
-      zIndex: hovered ? 1 : 0,
+      zIndex: focused || hovered ? 1 : 0,
     }}
   >
     <MarkerDiv
-      hovered={hovered}
+      focused={focused || hovered}
       onMouseOver={() => hoverItem(id)}
       onMouseOut={() => leaveItem(id)}
       onFocus={() => hoverItem(id)}
@@ -43,6 +44,7 @@ Item.propTypes = {
   coords: object, //eslint-disable-line
   name: string,
   id: string,
+  focused: bool,
   hovered: bool,
   hoverItem: func,
   leaveItem: func,

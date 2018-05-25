@@ -11,7 +11,7 @@ const Item = props => (
         providedItem={providedItem}
         snapshotItem={snapshotItem}
         name={props.name}
-        hovered={props.hovered}
+        hovered={props.hovered || props.focused}
         id={props.id}
         hoverItem={props.hoverItem}
         leaveItem={props.leaveItem}
@@ -27,6 +27,7 @@ Item.propTypes = {
   index: number,
   name: string,
   hovered: bool,
+  focused: bool,
   hoverItem: func,
   leaveItem: func,
   clickItem: func,

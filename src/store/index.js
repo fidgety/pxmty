@@ -55,6 +55,7 @@ const itinerary = extendObservable(this, {
       name,
       coords,
       hovered: false,
+      focused: false,
     });
     this.saveState();
   },
@@ -89,7 +90,11 @@ const itinerary = extendObservable(this, {
   hoverItem: id => {
     findItemById(this.items, id).hovered = true;
   },
+  focusItem: id => {
+    findItemById(this.items, id).focused = true;
+  },
   leaveItem: id => {
+    findItemById(this.items, id).focused = false;
     findItemById(this.items, id).hovered = false;
   },
   showItemDetail: id => {

@@ -31,7 +31,7 @@ const Itinerary = () => {
             provided={provided}
             snapshot={snapshot}
             items={day.items}
-            hoverItem={store.hoverItem}
+            hoverItem={store.focusItem}
             leaveItem={store.leaveItem}
             clickItem={store.showItemDetail}
             removeItem={store.removeItem}
@@ -50,7 +50,7 @@ const Itinerary = () => {
             provided={provided}
             snapshot={snapshot}
             items={store.shortlist}
-            hoverItem={store.hoverItem}
+            hoverItem={store.focusItem}
             leaveItem={store.leaveItem}
             clickItem={store.showItemDetail}
             removeItem={store.removeItem}
