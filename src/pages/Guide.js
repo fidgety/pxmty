@@ -16,12 +16,11 @@ const GuideDiv = styled.div`
 const Guide = ({match}) => {
   const {slug} = match.params;
   const selectedGuide = Guides.find(d => d.slug === slug.toLowerCase());
-  console.log("Selected", selectedGuide);
-  
-return (
+
+  return (
     <GuideDiv className="App">
       <Map />
-      <GuideList guides={selectedGuide} />
+      <GuideList selectedGuide={selectedGuide} />
     </GuideDiv>
   );
 };

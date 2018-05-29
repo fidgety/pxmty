@@ -27,7 +27,7 @@ export default [
       alt: "Coffee shop",
     },
     published: {
-      date: "2017-06-08",
+      date: "2018-05-28",
       by: "Vicin",
     },
     type: COFFEE,

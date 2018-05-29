@@ -15,14 +15,28 @@ const GuideDiv = styled.div`
   z-index: 10;
 `;
 
-const GuideList = ({guides}) => {
-  const list = guides.items.map(guide => <Card {...guide} key={guide.gid} />);
+const Heading = styled.h2``;
 
-  return <GuideDiv>{list}</GuideDiv>;
+const DescriptionDiv = styled.div`
+  padding: 10px 0;
+`;
+
+const GuideList = ({selectedGuide}) => {
+  const list = selectedGuide.items.map(guide => (
+    <Card {...guide} key={guide.gid} />
+  ));
+
+  return (
+    <GuideDiv>
+      <Heading>{selectedGuide.name}</Heading>
+      <DescriptionDiv>{selectedGuide.description}</DescriptionDiv>
+      {list}
+    </GuideDiv>
+  );
 };
 
 GuideList.propTypes = {
-  guides: object,  //eslint-disable-line
+    selectedGuide: object,  //eslint-disable-line
 };
 
 export default GuideList;
